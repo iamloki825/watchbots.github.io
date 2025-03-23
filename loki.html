@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WatchBots - Urban Protectors</title>
+    <link rel="stylesheet" href="loki.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Galaxy Background with Meteors -->
+    <div class="galaxy">
+        <div class="meteors"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="floating-nav">
+        <ul>
+            <li><a href="#home" class="portal">Home</a></li>
+            <li><a href="#features" class="portal">Features</a></li>
+            <li><a href="#contact" class="portal">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header Section with Effects -->
+    <header id="home">
+        <div id="particles-js"></div> <!-- Particle System -->
+        <h1 class="holographic-projection">
+            <span>W</span><span>a</span><span>t</span><span>c</span><span>h</span><span>B</span><span>o</span><span>t</span><span>s</span>
+        </h1>
+        <p class="tagline pulse-wave">Protecting Streets, Powering Safety</p>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2>Our Core Tech</h2>
+        <div class="feature-box quantum">
+            <i class="fas fa-camera energy"></i>
+            <h3>Traffic Control</h3>
+            <p class="desc">🚦 WatchBots includes a robotic rover with a camera and a toy drone. It uses computer vision (OpenCV) to detect traffic violations like vehicles crossing stop lines or riders not wearing helmets.</p>
+        </div>
+        <div class="feature-box quantum">
+            <i class="fas fa-user-shield energy"></i>
+            <h3>Crime Stopper</h3>
+            <p class="desc">🚔 In case of an emergency, such as a theft, harassment, or bullying, the rover can automatically request the drone to intervene. The drone has a non-lethal net gun to capture suspects safely.</p>
+        </div>
+        <div class="feature-box quantum">
+            <i class="fas fa-microphone energy"></i>
+            <h3>Voice Alert</h3>
+            <p class="desc">🎤 WatchBots is equipped with voice recognition to identify distress calls like someone shouting "help" or asking for an escort. This feature helps in detecting situations where someone might be in danger.</p>
+        </div>
+        <div class="feature-box quantum">
+            <i class="fas fa-running energy"></i>
+            <h3>Pose Detection</h3>
+            <p class="desc">🕵️‍♂️ The system uses pose estimation and movement tracking to identify suspicious scenarios, such as someone being chased or a woman walking alone at night. Alerts are sent to a central control station.</p>
+        </div>
+        <div class="feature-box quantum">
+            <i class="fas fa-traffic-light energy"></i>
+            <h3>Smart Signals</h3>
+            <p class="desc">🚥 In addition to crime detection, the WatchBot also acts like a traffic signal, managing road discipline and ensuring that vehicles and pedestrians follow proper safety rules.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="holographic-grid"></div>
+        <h2>Reach Out</h2>
+        <p>Email: sanjeeth13579@gmail.com</p>
+        <p>Phone: +91 9962320163</p>
+        <button class="contact-btn portal-btn">Contact Us</button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="stardust">
+        <p>© 2025 WatchBots. All rights reserved.</p>
+    </footer>
+
+    <!-- Particles.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+
+    <!-- JavaScript for Effects -->
+    <script>
+        // Particles.js Configuration
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 100, density: { enable: true, value_area: 800 } },
+                color: { value: ['#FF4500', '#C0C0C0', '#ff6a00'] },
+                shape: { type: 'star' },
+                opacity: { value: 0.7, random: true },
+                size: { value: 2, random: true },
+                line_linked: { enable: true, distance: 150, color: '#FF4500', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 3, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
+        // Typewriter Effect for Tagline
+        const tagline = document.querySelector('.tagline');
+        const text = tagline.textContent;
+        tagline.textContent = '';
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                tagline.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        setTimeout(typeWriter, 1800);
+
+        // Mouse Trail Nebula Effect
+        document.addEventListener('mousemove', (e) => {
+            const nebula = document.createElement('div');
+            nebula.className = 'nebula';
+            nebula.style.left = `${e.pageX}px`;
+            nebula.style.top = `${e.pageY}px`;
+            document.body.appendChild(nebula);
+            setTimeout(() => nebula.remove(), 1000);
+        });
+
+        // Holographic Projection for H1
+        const h1Spans = document.querySelectorAll('.holographic-projection span');
+        h1Spans.forEach(span => {
+            span.addEventListener('mouseover', () => {
+                gsap.to(span, {
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.3,
+                    onComplete: () => {
+                        gsap.to(span, { opacity: 1, y: 0, duration: 0.3 });
+                    }
+                });
+            });
+        });
+
+        // Floating Navbar Animation
+        gsap.to('.floating-nav', {
+            y: 10,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+            duration: 2
+        });
+
+        // Quantum Cards Animation
+        document.querySelectorAll('.quantum').forEach(card => {
+            card.addEventListener('mouseover', () => {
+                gsap.to(card, {
+                    scale: 1.1,
+                    boxShadow: '0 0 30px rgba(255, 69, 0, 0.8)',
+                    duration: 0.5
+                });
+            });
+            card.addEventListener('mouseout', () => {
+                gsap.to(card, {
+                    scale: 1,
+                    boxShadow: '0 0 10px rgba(255, 69, 0, 0.3)',
+                    duration: 0.5
+                });
+            });
+        });
+
+        // Portal Button Animation
+        document.querySelector('.portal-btn').addEventListener('click', () => {
+            gsap.to('.portal-btn', {
+                scale: 0,
+                duration: 0.5,
+                onComplete: () => {
+                    gsap.to('.portal-btn', { scale: 1, duration: 0.5 });
+                }
+            });
+        });
+
+        // Interactive Glow
+        document.addEventListener('mousemove', (e) => {
+            const elements = document.querySelectorAll('.quantum, .portal-btn, h1, h2, .portal');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - (rect.left + rect.width / 2);
+                const y = e.clientY - (rect.top + rect.height / 2);
+                const distance = Math.sqrt(x * x + y * y);
+                const glow = Math.max(0, 100 - distance) / 100;
+                el.style.setProperty('--glow', glow);
+            });
+        });
+
+        // Stardust Fade for Footer
+        gsap.from('.stardust p', {
+            opacity: 0,
+            y: 20,
+            duration: 1,
+            scrollTrigger: {
+                trigger: '.stardust',
+                start: 'top 80%',
+                end: 'bottom 20%',
+                toggleActions: 'play reverse play reverse'
+            }
+        });
+    </script>
+</body>
+</html>
